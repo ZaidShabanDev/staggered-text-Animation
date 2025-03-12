@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { synonymsForLuxury } from "./synonymsForLuxury";
+import { synonymsForFrames } from "./synonymsForLuxury";
 import { useState, useEffect } from "react";
 
 export default function Home() {
@@ -9,16 +9,17 @@ export default function Home() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % synonymsForLuxury.length);
+      setIndex((prevIndex) => (prevIndex + 1) % synonymsForFrames.length);
     }, 1500); // Change word every 1.5 seconds
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="flex justify-center items-center w-full h-[70vh] flex-col gap-5">
+    <section className="flex justify-center items-center w-full h-[70vh] flex-col gap-5 uppercase text-4xl md:text-9xl font-bold">
+      <h1>Bazlamit for</h1>
       <AnimatePresence mode="wait">
-        <Header key={index}>{synonymsForLuxury[index]}</Header>
+        <Header key={index}>{synonymsForFrames[index]}</Header>
       </AnimatePresence>
     </section>
   );
@@ -33,8 +34,7 @@ const Header = ({ children }: { children: string }) => {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="block overflow-hidden whitespace-nowrap 
-        uppercase text-4xl md:text-9xl font-bold"
+      className="block overflow-hidden whitespace-nowrap"
     >
       <div>
         {children.split("").map((letter, i) => {
